@@ -119,6 +119,8 @@ main() {
   info "Installed reela v$version to $INSTALL_DIR/$BINARY_NAME"
   echo ""
   echo "  Run 'reela --help' to get started."
+  echo ""
+  echo "  We recommend installing the reela-cli skills (https://github.com/reelanything/reela-cli)"
 }
 
 main "$@"
