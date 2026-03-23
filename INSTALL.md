@@ -22,7 +22,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 ## Step 2 — Install reela skills
 
-The skill at https://github.com/reelanything/reela-cli/tree/main/skills/reela-cli-usage is required for using reela-cli. Install it to your local skills directory.
+The skill at `https://github.com/reelanything/reela-cli` is required for using `reela-cli`. Install it to your local skills directory.
 
 ## Step 3 — Login
 
@@ -48,7 +48,7 @@ To update reela-cli to the latest version, re-run the install script:
 curl -fsSL https://raw.githubusercontent.com/reelanything/reela-cli/main/install.sh | bash
 ```
 
-After updating the binary, ask the user if they would also like to update the `reela-cli-usage` skill (recommended). If yes, re-install the skill from https://github.com/reelanything/reela-cli/tree/main/skills/reela-cli-usage to your local skills directory.
+After updating the binary, ask the user if they would also like to update the `reela-cli-usage` skill (recommended). If yes, re-install the skill from the repo to your local skills directory.
 
 ## Step 4 — Done!
 
