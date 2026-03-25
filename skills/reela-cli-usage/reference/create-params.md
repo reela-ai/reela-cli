@@ -42,7 +42,7 @@ The `--file` flag attaches media files with a specific role. Format: `--file ROL
 | `video-audio`     | Video (preserve audio-visual sync)        | mp4, mov       |
 | `reference-image` | Reference image (style/composition guide) | jpg, png, webp |
 | `original-image`  | Source image (for image-to-video)         | jpg, png, webp |
-| `background-music` | Background music track                   | mp3, wav       |
+| `background-music` | Music track for MV creation               | mp3, wav       |
 
 ## Session & Collection Grouping
 
@@ -59,4 +59,26 @@ Dry run: `reela create "Test" --visual ai-video --dry-run`
 Portrait: `reela create "Short form content" --visual ai-video --layout portrait`
 With file: `reela create "Animate this photo" --visual image-video --file original-image:./photo.jpg`
 With session: `reela create "Product demo" --visual ai-video --session my-campaign`
-With music: `reela create "Product demo" --visual avatar --file background-music:./bgm.mp3`
+
+## Common Scenarios
+
+AI explainer:
+`reela create "Quantum computing explained" --visual ai-video --duration 60`
+
+Avatar + product demo clips:
+`reela create "New product walkthrough" --visual avatar,original-clip,ai-video --avatar av_01 --file video-source:./demo.mp4 --duration 45 --layout portrait`
+
+MV from user's song:
+`reela create "City Pop MV" --visual ai-video --file background-music:./song.mp3 --duration 180 --layout portrait`
+
+Image as style reference:
+`reela create "Product introduction" --visual ai-video --file reference-image:./brand.jpg --duration 30`
+
+Image animation:
+`reela create "Animate this photo" --visual image-video --file original-image:./photo.jpg`
+
+Synced video edit:
+`reela create "Interview highlights" --visual original-sync --file video-audio:./interview.mp4 --duration 60`
+
+Pure clips compilation (no AI visuals):
+`reela create "Footage compilation" --visual original-clip --file video-source:./clip1.mp4 --file video-source:./clip2.mp4 --duration 30`

@@ -1,44 +1,38 @@
-# Daemon Internals
+# Daemon
 
-The `reela daemon` runs a background process that subscribes to task events and automatically delivers completed videos.
+The daemon is a background process that monitors task completion and delivers finished videos to the user's machine.
 
-## Architecture
+## What It Does
 
-1. **SQS Provisioning:** On start, calls `POST /api/sqs/provision` to get a per-user SQS queue URL + STS temporary credentials
-2. **Credential Refresh:** Caches STS credentials, auto-refreshes when within 5 minutes of expiry
-3. **Long-Polling Loop:** Polls SQS with 20-second wait, receives up to 10 messages per batch
-4. **Event Dispatch:** Routes messages to handler registry by task status
+- Watches for completed (or failed) video tasks
+- **Download delivery:** Saves finished `.mp4` files to a local directory and sends an OS notification
+- **Email delivery:** Triggers an email with the video link and sends an OS notification
+- On failure: sends an OS notification alerting the user
 
-## Delivery Flow (on task completion)
+## Managing Delivery Methods
 
-When a task reaches status `130` (completed):
+Use `reela subscribe` to control what happens when a video finishes:
 
-1. Fetches presigned download URL from `GET /api/tasks/{task_id}/download`
-2. Streams download to temp file (`.{task_id}.mp4.tmp`)
-3. Atomic rename to `{task_id}.mp4` in the download directory
-4. Sends OS notification: "Reela: Video completed" (prompt truncated to 50 chars)
+- `reela subscribe add download [--dir <path>]` — Enable auto-download (daemon starts automatically)
+- `reela subscribe add email [--address <email>]` — Enable email delivery (daemon starts automatically)
+- `reela subscribe remove <method>` — Disable a method (daemon stops if none remain)
+- `reela subscribe list` — Show active delivery methods
+- `reela subscribe status` — Show daemon status and active methods
 
-When a task reaches status `10` (failed):
+## Daemon Commands
 
-1. Sends OS notification: "Reela: Video rendering failed"
+- `reela daemon start` — Start the daemon in background
+- `reela daemon stop` — Stop the daemon
+- `reela daemon status` — Check if running
+- `reela daemon install` — Auto-start on boot (macOS LaunchAgent / Linux systemd user unit)
+- `reela daemon uninstall` — Remove auto-start
+- `reela daemon logs [--tail <n>]` — View recent logs (default: 20)
 
 ## Configuration
 
 | Key | Default | Description |
 |-----|---------|-------------|
-| `delivery.download` | `~/Videos/reela` | Download directory (tilde-expanded) |
+| `delivery.download` | `~/Videos/reela` | Download directory |
 | `delivery.notify` | `true` | Enable/disable OS notifications |
-
-## System Service Installation
-
-**macOS:** LaunchAgent plist at `~/Library/LaunchAgents/com.reela.daemon.plist` (RunAtLoad, KeepAlive)
-
-**Linux:** systemd user unit at `~/.config/systemd/user/reela-daemon.service` (Restart=on-failure, RestartSec=10)
-
-## Process Management
-
-- PID file: `~/.reela/daemon.pid`
-- Log file: `~/.reela/daemon.log` (verbosity via `RUST_LOG` env var)
-- Background mode: re-execs with `--foreground`, detaches via `setsid()`
-- Stop: sends SIGTERM, waits 10s, then SIGKILL
-- Graceful shutdown on SIGTERM and Ctrl+C
+| `delivery.methods` | `["download"]` | Active delivery method(s) |
+| `delivery.email.address` | (account email) | Custom email for email delivery |

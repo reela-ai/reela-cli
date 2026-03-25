@@ -6,13 +6,15 @@ version: 0.1.0
 
 # Reela CLI Usage
 
+Reela is an AI video creation platform that turns text, images, video clips, and music into finished videos. The `reela` CLI lets you create videos, manage tasks, and configure delivery — all from the terminal.
+
+**You are the operator.** When the user wants to create a video, run `reela` commands yourself rather than instructing the user to run them. Handle the full workflow: prepare inputs, assemble the command, execute it, and report the result.
+
 ## Install / Update
 
 If `reela` is not installed or you need to update, follow the install guide:
 
 > https://github.com/reelanything/reela-cli/blob/main/INSTALL.md
-
-Quick reference for the `reela` command-line tool.
 
 ## Authentication
 
@@ -42,24 +44,6 @@ Quick reference for the `reela` command-line tool.
 - `reela config profiles list` — List all profiles
 - `reela config profiles use <name>` — Set the active profile
 
-## Daemon
-
-The daemon is a background process that subscribes to task completion events via SQS long-polling and performs automatic delivery (download + OS notification).
-
-**Commands:**
-- `reela daemon start [--foreground]` — Start background daemon
-- `reela daemon stop` — Stop daemon
-- `reela daemon status` — Check daemon status (running, PID, uptime)
-- `reela daemon install` — Install as system service (auto-start on boot)
-- `reela daemon uninstall` — Uninstall the system service
-- `reela daemon logs --tail <n>` — View recent logs
-
-**Behavior:** When running, the daemon automatically downloads completed videos to `delivery.download` dir (default `~/Videos/reela`) and sends OS notifications. See [daemon.md](./reference/daemon.md) for details.
-
-**Config keys:**
-- `delivery.download` — Download directory (default: `~/Videos/reela`)
-- `delivery.notify` — Enable OS notifications (default: `true`)
-
 ## Global Flags
 
 `--profile <name>`, `--api-base <url>`, `--output json|table|plain`, `--no-color`, `--verbose`
@@ -70,14 +54,14 @@ The daemon is a background process that subscribes to task completion events via
 
 ## File System Locations
 
-| Path | Purpose |
-|------|---------|
-| `~/.reela/config.toml` | CLI configuration |
-| `~/.reela/credentials.json` | Stored OAuth credentials |
-| `~/.reela/daemon.pid` | Daemon PID file |
-| `~/.reela/daemon.log` | Daemon log file |
+| Path                            | Purpose                     |
+| ------------------------------- | --------------------------- |
+| `~/.reela/config.toml`          | CLI configuration           |
+| `~/.reela/credentials.json`     | Stored OAuth credentials    |
+| `~/.reela/daemon.pid`           | Daemon PID file             |
+| `~/.reela/daemon.log`           | Daemon log file             |
 | `~/.config/reela/sessions.json` | Session-to-collection index |
-| `~/Videos/reela/` | Default download directory |
+| `~/Videos/reela/`               | Default download directory  |
 
 ## Exit Codes
 
@@ -102,19 +86,14 @@ The daemon is a background process that subscribes to task completion events via
 | 26   | partial    |
 | 130  | completed  |
 
-## Update
-
-To update reela-cli and this skill, fetch the install guide for instructions:
-
-https://raw.githubusercontent.com/reelanything/reela-cli/main/INSTALL.md
-
 ## Reference
 
 Detailed documentation is available in the `reference/` directory:
 
-| File                                             | Description                                                                          |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| [create-params.md](./reference/create-params.md) | `reela create` 命令的完整参数说明，包括必选/可选参数、Visual 类型枚举和用法示例      |
-| [file-attachments.md](./reference/file-attachments.md) | 文件附件指南，说明如何通过 `--file` 标志上传图片、视频、音乐作为素材 |
-| [tiers.md](./reference/tiers.md)                 | 视频质量等级对比表，包含各等级的画质、速度、积分消耗及推荐场景                       |
-| [daemon.md](./reference/daemon.md)                 | Daemon 内部机制：SQS 订阅、自动下载、OS 通知、系统服务安装              |
+| File                                                   | Description                                                                                                                       |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| [create-params.md](./reference/create-params.md)       | Full parameter reference for `reela create`, including required/optional params, visual types, and usage examples                 |
+| [file-attachments.md](./reference/file-attachments.md) | File attachment guide: how to upload images, videos, and music as source material via the `--file` flag                           |
+| [agent-workflow.md](./reference/agent-workflow.md)     | Agent workflow guide: input preparation, file classification decisions, video production model, and end-to-end examples           |
+| [tiers.md](./reference/tiers.md)                       | Video quality tier comparison: resolution, speed, credit cost, and recommended use cases                                          |
+| [daemon.md](./reference/daemon.md)                     | Daemon & subscribe: auto-download/email delivery on task completion, `reela subscribe` / `reela daemon` commands, config keys, auto-start setup |
