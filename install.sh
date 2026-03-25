@@ -4,6 +4,8 @@ set -euo pipefail
 REPO="reelanything/reela-cli"
 INSTALL_DIR="${REELA_INSTALL_DIR:-$HOME/.local/bin}"
 BINARY_NAME="reela"
+TMPDIR_CLEANUP=""
+trap 'if [ -n "$TMPDIR_CLEANUP" ]; then rm -rf "$TMPDIR_CLEANUP"; fi' EXIT
 
 # --- Helpers ---
 
@@ -25,23 +27,23 @@ detect_target() {
   arch="$(uname -m)"
 
   case "$os" in
-    Linux)
-      case "$arch" in
-        x86_64)  target="x86_64-unknown-linux-musl" ;;
-        aarch64) target="aarch64-unknown-linux-musl" ;;
-        *)       die "Unsupported Linux architecture: $arch" ;;
-      esac
-      ;;
-    Darwin)
-      case "$arch" in
-        x86_64)  target="x86_64-apple-darwin" ;;
-        arm64)   target="aarch64-apple-darwin" ;;
-        *)       die "Unsupported macOS architecture: $arch" ;;
-      esac
-      ;;
-    *)
-      die "Unsupported OS: $os. For Windows, download from https://github.com/$REPO/releases"
-      ;;
+  Linux)
+    case "$arch" in
+    x86_64) target="x86_64-unknown-linux-musl" ;;
+    aarch64) target="aarch64-unknown-linux-musl" ;;
+    *) die "Unsupported Linux architecture: $arch" ;;
+    esac
+    ;;
+  Darwin)
+    case "$arch" in
+    x86_64) target="x86_64-apple-darwin" ;;
+    arm64) target="aarch64-apple-darwin" ;;
+    *) die "Unsupported macOS architecture: $arch" ;;
+    esac
+    ;;
+  *)
+    die "Unsupported OS: $os. For Windows, download from https://github.com/$REPO/releases"
+    ;;
   esac
 
   echo "$target"
@@ -51,9 +53,9 @@ detect_target() {
 
 get_latest_version() {
   local version
-  version=$(curl -fsSL "https://api.github.com/repos/$REPO/releases/latest" \
-    | grep '"tag_name"' \
-    | sed -E 's/.*"tag_name": *"reela-cli-v([^"]+)".*/\1/')
+  version=$(curl -fsSL "https://api.github.com/repos/$REPO/releases/latest" |
+    grep '"tag_name"' |
+    sed -E 's/.*"tag_name": *"reela-cli-v([^"]+)".*/\1/')
 
   if [ -z "$version" ]; then
     die "Failed to determine latest version"
@@ -83,19 +85,20 @@ main() {
 
   local tmpdir
   tmpdir=$(mktemp -d)
-  trap 'rm -rf "$tmpdir"' EXIT
+  TMPDIR_CLEANUP="$tmpdir"
 
   info "Downloading $archive_name..."
   curl -fsSL "$archive_url" -o "$tmpdir/$archive_name"
 
   info "Verifying checksum..."
   curl -fsSL "$checksum_url" -o "$tmpdir/SHA256SUMS"
-  (cd "$tmpdir" && grep "$archive_name" SHA256SUMS | \
-    if command -v sha256sum >/dev/null 2>&1; then
-      sha256sum -c --quiet
-    else
-      shasum -a 256 -c --quiet
-    fi
+  (
+    cd "$tmpdir" && grep "$archive_name" SHA256SUMS |
+      if command -v sha256sum >/dev/null 2>&1; then
+        sha256sum -c --quiet
+      else
+        shasum -a 256 -c --quiet
+      fi
   ) || die "Checksum verification failed"
 
   info "Extracting..."

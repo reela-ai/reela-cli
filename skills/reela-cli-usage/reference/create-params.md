@@ -18,6 +18,7 @@
 | `--file`            | string[] | []        | Attach file with role (ROLE:PATH)    |
 | `--download`        | string   | —         | One-time download dir override       |
 | `--dry-run`         | bool     | false     | Validate without creating            |
+| `--session`         | string   | auto      | Session name for collection grouping (default: {hostname}-{username}-{YYYY-MM-DD}) |
 | `--idempotency-key` | string   | —         | Prevent duplicate creation           |
 
 ## Visual Types
@@ -43,6 +44,13 @@ The `--file` flag attaches media files with a specific role. Format: `--file ROL
 | `original-image`  | Source image (for image-to-video)         | jpg, png, webp |
 | `background-music` | Background music track                   | mp3, wav, aac  |
 
+## Session & Collection Grouping
+
+Videos created with the same `--session` name share a collection. The session-to-collection mapping is stored locally at `~/.config/reela/sessions.json`.
+
+- Default session: `{hostname}-{username}-{YYYY-MM-DD}` (daily rotation)
+- Override: `REELA_COLLECTION_ID` env var bypasses session logic entirely
+
 ## Usage Examples
 
 Basic: `reela create "A 30s intro video about AI" --visual ai-video`
@@ -50,4 +58,5 @@ With avatar: `reela create "Product demo" --visual avatar --avatar av_01 --durat
 Dry run: `reela create "Test" --visual ai-video --dry-run`
 Portrait: `reela create "Short form content" --visual ai-video --layout portrait`
 With file: `reela create "Animate this photo" --visual image-video --file original-image:./photo.jpg`
+With session: `reela create "Product demo" --visual ai-video --session my-campaign`
 With music: `reela create "Product demo" --visual avatar --file background-music:./bgm.mp3`

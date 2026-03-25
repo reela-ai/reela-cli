@@ -6,6 +6,12 @@ version: 0.1.0
 
 # Reela CLI Usage
 
+## Install / Update
+
+If `reela` is not installed or you need to update, follow the install guide:
+
+> https://github.com/reelanything/reela-cli/blob/main/INSTALL.md
+
 Quick reference for the `reela` command-line tool.
 
 ## Authentication
@@ -18,7 +24,7 @@ Quick reference for the `reela` command-line tool.
 
 - `reela create <prompt> [flags]` — Create a new video task
 - `reela create --prompt-file <path> [flags]` — Create from prompt file
-- Key flags: `--duration`, `--layout`, `--tier`, `--visual`, `--avatar`, `--file`, `--dry-run`, `--idempotency-key`
+- Key flags: `--duration`, `--layout`, `--tier`, `--visual`, `--avatar`, `--file`, `--session`, `--dry-run`, `--idempotency-key`
 
 ## Task Management
 
@@ -49,7 +55,7 @@ Quick reference for the `reela` command-line tool.
 
 ## Environment Variables
 
-`REELA_PROFILE`, `REELA_API_BASE`, `REELA_OUTPUT`
+`REELA_PROFILE`, `REELA_API_BASE`, `REELA_OUTPUT`, `REELA_COLLECTION_ID`
 
 ## Exit Codes
 
