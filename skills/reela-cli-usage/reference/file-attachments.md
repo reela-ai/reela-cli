@@ -1,24 +1,10 @@
-# File Attachments
+# File Attachments — Role Decision Guide
 
-Attach your own media (images, videos, music) as source material for video creation using the `--file` flag.
-
-## Syntax
-
-`reela create "prompt" --file ROLE:PATH [--file ROLE:PATH ...]`
-
-## Roles
-
-| Role              | Description                               | Formats        |
-| ----------------- | ----------------------------------------- | -------------- |
-| `video-source`    | Video clip (visual only, audio muted)     | mp4, mov       |
-| `video-audio`     | Video (preserve audio-visual sync)        | mp4, mov       |
-| `reference-image` | Reference image (style/composition guide) | jpg, png, webp |
-| `original-image`  | Source image (for image-to-video)         | jpg, png, webp |
-| `background-music` | Music track for MV creation               | mp3, wav       |
+> For syntax and available roles, run `reela create -h`.
 
 ## How to Choose a Role
 
-### Video Files
+### Video Files — Does the Original Audio Matter?
 
 | Signal | Role | Result |
 |--------|------|--------|
@@ -26,7 +12,7 @@ Attach your own media (images, videos, music) as source material for video creat
 | Audio-visual sync matters (interview, concert, speech) | `video-audio` | Original audio preserved |
 | Ambiguous? | Ask the user | |
 
-### Image Files
+### Image Files — What Role Does This Image Play?
 
 | Signal | Role | Result |
 |--------|------|--------|
@@ -37,11 +23,7 @@ Default to `reference-image` — better quality, more useful. Only use `original
 
 ### Audio Files — MV Creation Only
 
-| Signal | Role | Result |
-|--------|------|--------|
-| User provides a song for MV creation | `background-music` | Reela generates visuals to match the music |
-
-Audio attachments are exclusively for MV creation.
+Audio attachments are exclusively for MV creation (`background-music` role).
 
 ## MV: Lyrics Requirement
 
@@ -53,10 +35,3 @@ Music tracks (`background-music`) **must include lyrics embedded in the audio fi
 3. Attach the enriched mp3 as `background-music`
 
 Without embedded lyrics, Reela cannot do lip-sync or align visuals to song content.
-
-## Examples
-
-Image to video: `reela create "Animate this photo" --visual image-video --file original-image:./photo.jpg`
-With reference: `reela create "Video in this style" --visual ai-video --file reference-image:./style.png`
-MV from song: `reela create "City Pop MV" --visual ai-video --file background-music:./song.mp3 --layout portrait --duration 180`
-Multiple files: `reela create "Edit this" --visual original-clip --file video-source:./clip1.mp4 --file video-source:./clip2.mp4`
