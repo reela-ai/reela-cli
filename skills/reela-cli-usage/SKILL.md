@@ -41,6 +41,7 @@ If `reela` is not installed or you need to update, follow the install guide:
 | `~/.reela/credentials.json`     | Stored OAuth credentials    |
 | `~/.reela/daemon.pid`           | Daemon PID file             |
 | `~/.reela/daemon.log`           | Daemon log file             |
+| `~/.reela/tiers.json`           | Cached tier config          |
 | `~/.config/reela/sessions.json` | Session-to-collection index |
 | `~/Videos/reela/`               | Default download directory  |
 
@@ -51,7 +52,6 @@ Detailed documentation is available in the `reference/` directory:
 | File                                                   | Description                                                                                         |
 | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
 | [agent-workflow.md](./reference/agent-workflow.md)     | Agent workflow guide: input preparation, file classification decisions, and end-to-end examples     |
-| [create-params.md](./reference/create-params.md)       | Supplementary notes for `reela create` — visual combinations, session grouping, tier recommendations |
+| [create-params.md](./reference/create-params.md)       | Supplementary notes for `reela create` — visual combinations, session grouping                       |
 | [file-attachments.md](./reference/file-attachments.md) | File role decision guide: how to choose the right `--file` role for images, videos, and music       |
-| [tiers.md](./reference/tiers.md)                       | Video quality tier comparison: resolution, speed, credit cost, and recommended use cases            |
 | [daemon.md](./reference/daemon.md)                     | Daemon & delivery: auto-download/email on task completion, configuration keys                       |
