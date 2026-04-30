@@ -33,18 +33,6 @@ If `reela` is not installed or you need to update, follow the install guide:
 | 26   | partial    |
 | 130  | completed  |
 
-## File System Locations
-
-| Path                            | Purpose                     |
-| ------------------------------- | --------------------------- |
-| `~/.reela/config.toml`          | CLI configuration           |
-| `~/.reela/credentials.json`     | Stored OAuth credentials    |
-| `~/.reela/daemon.pid`           | Daemon PID file             |
-| `~/.reela/daemon.log`           | Daemon log file             |
-| `~/.reela/tiers.json`           | Cached tier config          |
-| `~/.config/reela/sessions.json` | Session-to-collection index |
-| `~/Videos/reela/`               | Default download directory  |
-
 ## Reference
 
 Detailed documentation is available in the `reference/` directory:

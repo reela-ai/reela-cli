@@ -4,20 +4,26 @@
 
 ## Visual Combinations
 
-Multiple visual types can be combined with commas: `--visual avatar,original-clip,ai-video`
+Multiple visual types are specified by repeating `--visual`:
 
-| Scenario | `--visual` value | Additional flags |
+```bash
+--visual avatar --visual original-clip --visual ai-video
+```
+
+Do **not** comma-join visual values; `--visual avatar,ai-video` is invalid.
+
+| Scenario | Visual flags | Additional flags |
 |---|---|---|
-| AI explainer | `ai-video` | — |
-| Avatar talking-head | `avatar,ai-video` | `--avatar <id>` |
-| Clip remix + AI filler | `original-clip,ai-video` | `--file video-source:...` |
-| Avatar + clips | `avatar,original-clip,ai-video` | `--avatar <id>` + `--file video-source:...` |
-| MV from user's song | `ai-video` | `--file background-music:...` |
-| AI-generated MV / music video | `ai-video` | `--music-video` |
-| Synced video edit | `original-sync` | `--file video-audio:...` |
-| Pure clips (no AI) | `original-clip` | `--file video-source:...` |
-| Image animation | `image-video` | `--file original-image:...` |
-| Image as style ref | `ai-video` | `--file reference-image:...` |
+| AI explainer | `--visual ai-video` | — |
+| Avatar talking-head | `--visual avatar --visual ai-video` | `--avatar <id>` |
+| Clip remix + AI filler | `--visual original-clip --visual ai-video` | `--file video-source:...` |
+| Avatar + clips | `--visual avatar --visual original-clip --visual ai-video` | `--avatar <id>` + `--file video-source:...` |
+| MV from user's song | `--visual ai-video` | `--file background-music:...` |
+| AI-generated MV / music video | `--visual ai-video` | `--music-video` |
+| Synced video edit | `--visual original-sync` | `--file video-audio:...` |
+| Pure clips (no AI) | `--visual original-clip` | `--file video-source:...` |
+| Image animation | `--visual image-video` | `--file original-image:...` |
+| Image as style ref | `--visual ai-video` | `--file reference-image:...` |
 
 ## Music Video / MV Mode
 
@@ -32,8 +38,19 @@ Multiple visual types can be combined with commas: `--visual avatar,original-cli
 reela create "Create an AI-generated city-pop MV about a rainy neon street" --visual ai-video --music-video --duration 60
 ```
 
+## Tier Selection
+
+`reela create` requires a pipeline tier. Prefer using a tier label from `reela tiers list`:
+
+```bash
+reela tiers list
+reela create "Product launch video" --tier "<tier label>" --visual ai-video --duration 30 --dry-run
+```
+
+If `--tier` is omitted, the CLI uses the default tier from the local tier cache. Run `reela config sync` if the cache is missing or stale.
+
 ## Session & Collection Grouping
 
-Videos created with the same `--session` name share a collection. The session-to-collection mapping is stored locally at `~/.config/reela/sessions.json`.
+Videos created with the same `--session` name share a collection.
 
 - Default session: `{hostname}-{username}-{YYYY-MM-DD}` (daily rotation)

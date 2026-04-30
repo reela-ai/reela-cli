@@ -31,14 +31,17 @@ Reela accepts structured inputs (prompt, files, flags). Your job is to bridge th
 
 ### Step 1: Gather Minimum Information
 
-Every `reela create` needs: **prompt + `--visual` + duration + layout**.
+Every `reela create` needs: **prompt + `--visual` + tier + duration + layout**.
 
 | Info | How to get it | Default |
 |---|---|---|
 | What is the video about? | User's message | — (must have) |
 | Visual type(s) | Determine from files + intent | — (must specify) |
+| Pipeline tier | Use a label from `reela tiers list`; if omitted, CLI uses cached default tier | Cached default tier |
 | How long? | User says "30s" / "1 min" | `30` |
 | Orientation? | User says vertical/horizontal, or infer from context | `landscape` |
+
+If the available tiers or default tier are unknown, run `reela config sync` or `reela tiers list` before assembling the create command.
 
 ### Step 2: Classify Files
 
@@ -46,7 +49,7 @@ When the user provides files, decide the `--file` role. See [file-attachments.md
 
 ### Step 3: Assemble Command
 
-Use defaults for anything the user didn't specify. Only ask when truly ambiguous. See [create-params.md](./create-params.md) for visual combinations.
+Use defaults for anything the user didn't specify. Only ask when truly ambiguous. See [create-params.md](./create-params.md) for visual combinations and tier selection.
 
 **Music-video guardrail:** Only add `--music-video` when the user explicitly requests an MV, music video, AI-generated song/music track, or song-led video. Do not use it for ordinary background music; instead, leave the flag unset and mention the desired music mood/style in the prompt.
 
@@ -66,7 +69,7 @@ Use defaults for anything the user didn't specify. Only ask when truly ambiguous
 Agent pre-processing: scrape text + download images from URL.
 
 ```bash
-reela create "Company promo video" --visual ai-video \
+reela create "Company promo video" --tier "<tier label>" --visual ai-video \
   --file reference-image:./hero.jpg \
   --file reference-image:./product.png \
   --duration 30 --dry-run
@@ -77,7 +80,7 @@ reela create "Company promo video" --visual ai-video \
 Agent pre-processing: extract text + images from PDF.
 
 ```bash
-reela create "Q3 earnings report highlights" --visual ai-video \
+reela create "Q3 earnings report highlights" --tier "<tier label>" --visual ai-video \
   --file reference-image:./chart.png \
   --file reference-image:./product.jpg \
   --duration 120 --dry-run
@@ -88,7 +91,7 @@ reela create "Q3 earnings report highlights" --visual ai-video \
 Agent pre-processing: transcribe lyrics → embed in mp3 metadata.
 
 ```bash
-reela create "City Pop MV" --visual ai-video \
+reela create "City Pop MV" --tier "<tier label>" --visual ai-video \
   --file background-music:./song_with_lyrics.mp3 \
   --duration 180 --layout portrait --dry-run
 ```
@@ -98,6 +101,6 @@ reela create "City Pop MV" --visual ai-video \
 Use `--music-video` only because the request is explicitly for an AI-generated MV/music video.
 
 ```bash
-reela create "Create an AI-generated synthwave music video about a night drive" --visual ai-video \
+reela create "Create an AI-generated synthwave music video about a night drive" --tier "<tier label>" --visual ai-video \
   --music-video --duration 60 --layout portrait --dry-run
 ```
