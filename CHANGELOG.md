@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- First-class CLI profile management: `reela config profiles list/show/create/delete/use`.
+- Profile-specific credentials, tier cache, feature-flag cache, session mappings, and daemon PID/log files under `~/.reela/profiles/<name>/`.
+- Legacy compatibility that lazily copies existing `~/.reela/credentials.json`, `tiers.json`, and `feature-flags.json` into the default profile without deleting legacy files.
+
+### Changed
+
+- Delivery settings remain global while API/auth/cache/session/daemon state follows the effective profile.
+
 ## [0.1.0]
 
 ### Added

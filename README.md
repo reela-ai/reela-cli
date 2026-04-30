@@ -52,7 +52,18 @@ reela tasks
 
 ## Configuration
 
-Configuration is stored in `~/.config/reela/`. Use `reela config` to manage profiles and settings.
+Configuration is stored in `~/.reela/`. Profiles isolate API base URL, credentials, caches, session-to-collection mappings, and daemon runtime files under `~/.reela/profiles/<name>/`. Delivery settings remain global.
+
+```sh
+reela config profiles list
+reela config profiles create staging --api-base https://staging-cli-api.reela.com
+reela --profile staging login
+reela config profiles use staging
+reela config profiles show
+reela --profile work logout
+```
+
+Use `--profile <name>` or `REELA_PROFILE=<name>` for one-off commands, or `reela config profiles use <name>` to set the active profile.
 
 ## License
 
