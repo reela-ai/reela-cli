@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REPO="reela-ai/reela-cli"
+REPO="${REELA_CLI_REPO:-reela-ai/reela-cli}"
 INSTALL_DIR="${REELA_INSTALL_DIR:-$HOME/.local/bin}"
 BINARY_NAME="reela"
 TMPDIR_CLEANUP=""
@@ -123,7 +123,7 @@ main() {
   echo ""
   echo "  Run 'reela --help' to get started."
   echo ""
-  echo "  We recommend installing the reela-cli skills (https://github.com/reela-ai/reela-cli)"
+  echo "  We recommend installing the reela-cli skills (https://github.com/reela-ai/skills)"
 }
 
 main "$@"

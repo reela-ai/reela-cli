@@ -8,7 +8,7 @@ Command-line interface for [Reela](https://reela.com) — create AI-powered vide
 
 Tell your agent:
 
-> Follow <https://github.com/reela-ai/reela-cli/blob/main/INSTALL.md> to install Reela CLI and skills.
+> Follow <https://github.com/reela-ai/reela-cli/blob/main/INSTALL.md> to install Reela CLI, then install the Reela skills from <https://github.com/reela-ai/skills>.
 
 ### Manual Install (Linux / macOS)
 
@@ -19,7 +19,7 @@ curl -fsSL https://raw.githubusercontent.com/reela-ai/reela-cli/main/install.sh 
 ### Install skills
 
 ```sh
-npx skills add https://github.com/reela-ai/reela-cli -g
+npx skills add https://github.com/reela-ai/skills -g
 ```
 
 ## Quick Start
