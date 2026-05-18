@@ -52,12 +52,11 @@ detect_target() {
 # --- Get latest version ---
 
 get_latest_version() {
-  local version
-  version=$(curl -fsSL "https://api.github.com/repos/$REPO/releases/latest" |
-    grep '"tag_name"' |
-    sed -E 's/.*"tag_name": *"reela-cli-v([^"]+)".*/\1/')
+  local latest_url version
+  latest_url=$(curl -fsSL -o /dev/null -w '%{url_effective}' "https://github.com/$REPO/releases/latest")
+  version=$(echo "$latest_url" | sed -E 's#.*/releases/tag/reela-cli-v([^/?#]+).*#\1#')
 
-  if [ -z "$version" ]; then
+  if [ -z "$version" ] || [ "$version" = "$latest_url" ]; then
     die "Failed to determine latest version"
   fi
 
