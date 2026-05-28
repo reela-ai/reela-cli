@@ -8,7 +8,7 @@ Command-line interface for [Reela](https://reela.com) — create AI-powered vide
 
 Tell your agent:
 
-> Follow <https://github.com/reela-ai/reela-cli/blob/main/INSTALL.md> to install Reela CLI, then install the Reela skills from <https://github.com/reela-ai/skills>.
+> Follow <https://github.com/reela-ai/reela-cli/blob/main/INSTALL.md> to install Reela CLI. After installation, run `reela docs --json` to discover local CLI docs paths; for agent workflow and examples, use the Reela skills.
 
 ### Manual Install (Linux / macOS)
 
@@ -16,11 +16,15 @@ Tell your agent:
 curl -fsSL https://raw.githubusercontent.com/reela-ai/reela-cli/main/install.sh | bash
 ```
 
-### Install skills
+### CLI docs
+
+Direct CLI command docs are installed locally to `~/.reela/docs` by the install script and by `reela update`. Agents and users can discover exact local paths at runtime:
 
 ```sh
-npx skills add https://github.com/reela-ai/skills -g
+reela docs --json
 ```
+
+The public repository also keeps a copy under `docs/`. Agent workflow and use cases live in the optional Reela skills.
 
 ## Quick Start
 
@@ -43,16 +47,17 @@ reela tasks
 | Command  | Description                          |
 | -------- | ------------------------------------ |
 | `login`  | Authenticate with your Reela account |
-| `logout` | Remove stored credentials            |
+| `logout` | Sign out from this device            |
 | `whoami` | Show current authenticated user      |
 | `create` | Create a new video                   |
 | `status` | Check status of recent tasks         |
 | `tasks`  | List all tasks                       |
 | `config` | Manage CLI configuration             |
+| `docs`   | Print local CLI documentation paths  |
 
 ## Configuration
 
-Configuration is stored in `~/.reela/`. Profiles isolate API base URL, credentials, caches, session-to-collection mappings, and daemon runtime files under `~/.reela/profiles/<name>/`. Delivery settings remain global.
+Configuration is stored in `~/.reela/`. Profiles let you keep separate Reela accounts and local settings under `~/.reela/profiles/<name>/`. Delivery settings are shared across profiles.
 
 ```sh
 reela config profiles list

@@ -1,4 +1,4 @@
-# Install Reela CLI & Skills
+# Install Reela CLI
 
 > **For AI Agents**: Follow this guide step-by-step. Run each command, verify the output, then proceed to the next step.
 
@@ -20,13 +20,24 @@ If `reela` is not found, add `~/.local/bin` to your PATH:
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
-## Step 2 — Install reela skills
+## Step 2 — Discover local CLI docs
 
-The skill at `https://github.com/reela-ai/skills` is required for using `reela-cli`. Install it to your local skills directory.
+Direct CLI command docs are installed locally to `~/.reela/docs`. Discover exact paths at runtime:
 
 ```sh
-npx skills add https://github.com/reela-ai/skills -g
+reela docs --json
 ```
+
+Expected files include:
+
+```txt
+~/.reela/docs/create.md
+~/.reela/docs/daemon.md
+~/.reela/docs/config.md
+~/.reela/docs/tasks.md
+```
+
+Agents should run `reela docs --json` before using Reela CLI so they can read only the docs needed for the current task. Agent workflow, posture, and use cases live in the optional Reela skills.
 
 ## Step 3 — Login
 
@@ -52,10 +63,10 @@ To update reela-cli to the latest version, re-run the install script:
 curl -fsSL https://raw.githubusercontent.com/reela-ai/reela-cli/main/install.sh | bash
 ```
 
-After updating the binary, ask the user if they would also like to update the `reela-cli-usage` skill (recommended). If yes, re-install the skill from `https://github.com/reela-ai/skills` to your local skills directory.
+CLI docs are versioned with each release and installed to `~/.reela/docs`. After updating, run `reela docs --json` to discover the current local docs paths.
 
 ## Step 4 — Done!
 
 Setup is complete. Tell the user that Reela CLI is ready and they can now ask you to create videos.
 
-> **Important**: When using `reela` to create videos, always load the `reela-cli-usage` skill first.
+> **Important**: When using `reela` to create videos, run `reela docs --json` for local direct CLI reference. Reela skills are optional enhancements for agent workflow.
