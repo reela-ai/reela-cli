@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - First-class CLI profile management: `reela config profiles list/show/create/delete/use`.
 - Profile-specific account state and local settings under `~/.reela/profiles/<name>/`.
 - Legacy compatibility for users upgrading from earlier CLI versions.
-- Local CLI docs installed to `~/.reela/docs` and discoverable with `reela docs --json`.
+- Local CLI docs installed to `~/.reela/docs` and discoverable with `reela docs`.
 
 ### Changed
 

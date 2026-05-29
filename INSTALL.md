@@ -25,7 +25,7 @@ export PATH="$HOME/.local/bin:$PATH"
 Direct CLI command docs are installed locally to `~/.reela/docs`. Discover exact paths at runtime:
 
 ```sh
-reela docs --json
+reela docs
 ```
 
 Expected files include:
@@ -37,7 +37,7 @@ Expected files include:
 ~/.reela/docs/tasks.md
 ```
 
-Agents should run `reela docs --json` before using Reela CLI so they can read only the docs needed for the current task. Agent workflow, posture, and use cases live in the optional Reela skills.
+Agents should run `reela docs` before using Reela CLI so they can read only the docs needed for the current task. Agent workflow, posture, and use cases live in the optional Reela skills.
 
 ## Step 3 — Login
 
@@ -63,10 +63,10 @@ To update reela-cli to the latest version, re-run the install script:
 curl -fsSL https://raw.githubusercontent.com/reela-ai/reela-cli/main/install.sh | bash
 ```
 
-CLI docs are versioned with each release and installed to `~/.reela/docs`. After updating, run `reela docs --json` to discover the current local docs paths.
+CLI docs are versioned with each release and installed to `~/.reela/docs`. After updating, run `reela docs` to discover the current local docs paths.
 
 ## Step 4 — Done!
 
 Setup is complete. Tell the user that Reela CLI is ready and they can now ask you to create videos.
 
-> **Important**: When using `reela` to create videos, run `reela docs --json` for local direct CLI reference. Reela skills are optional enhancements for agent workflow.
+> **Important**: When using `reela` to create videos, run `reela docs` for local direct CLI reference. Reela skills are optional enhancements for agent workflow.

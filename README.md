@@ -8,7 +8,7 @@ Command-line interface for [Reela](https://reela.com) — create AI-powered vide
 
 Tell your agent:
 
-> Follow <https://github.com/reela-ai/reela-cli/blob/main/INSTALL.md> to install Reela CLI. After installation, run `reela docs --json` to discover local CLI docs paths; for agent workflow and examples, use the Reela skills.
+> Follow <https://github.com/reela-ai/reela-cli/blob/main/INSTALL.md> to install Reela CLI. After installation, run `reela docs` to discover local CLI docs paths; for agent workflow and examples, use the Reela skills.
 
 ### Manual Install (Linux / macOS)
 
@@ -21,7 +21,7 @@ curl -fsSL https://raw.githubusercontent.com/reela-ai/reela-cli/main/install.sh 
 Direct CLI command docs are installed locally to `~/.reela/docs` by the install script and by `reela update`. Agents and users can discover exact local paths at runtime:
 
 ```sh
-reela docs --json
+reela docs
 ```
 
 The public repository also keeps a copy under `docs/`. Agent workflow and use cases live in the optional Reela skills.

@@ -1,7 +1,7 @@
 ---
 title: Daemon & Delivery
 description: Run the background daemon, subscribe to task updates, and deliver completed videos automatically.
-version: 1.15.1
+version: 1.15.2
 ---
 
 # Daemon & Delivery
@@ -75,7 +75,7 @@ To run your own local script when a task completes or fails:
 reela subscribe add script --path ~/bin/reela-callback.sh --timeout-seconds 300 --max-retries 3
 ```
 
-For script creation, payload format, and safety guidelines, see `script.md` from `reela docs --json`.
+For script creation, payload format, and safety guidelines, see `script.md` from `reela docs`.
 
 ## Manual polling without the daemon
 

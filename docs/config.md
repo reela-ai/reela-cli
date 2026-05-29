@@ -1,7 +1,7 @@
 ---
 title: Reela Config
 description: Configure CLI profiles, API endpoints, delivery methods, download paths, and local settings.
-version: 1.15.1
+version: 1.15.2
 ---
 
 # Reela Config
@@ -51,7 +51,7 @@ reela config set delivery.script.timeout_seconds 300
 reela config set delivery.script.max_retries 5
 ```
 
-For instructions on creating a custom delivery script, see `script.md` from `reela docs --json`.
+For instructions on creating a custom delivery script, see `script.md` from `reela docs`.
 
 ## Profiles
 
