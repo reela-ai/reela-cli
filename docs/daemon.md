@@ -1,3 +1,9 @@
+---
+title: Daemon & Delivery
+description: Run the background daemon, subscribe to task updates, and deliver completed videos automatically.
+version: 1.15.1
+---
+
 # Daemon & Delivery
 
 The daemon is a background process that monitors task completion and delivers finished videos. Without it, the user has to poll `reela tasks list` manually.

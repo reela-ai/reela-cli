@@ -1,3 +1,9 @@
+---
+title: Custom Delivery Scripts
+description: Build local delivery callback scripts, understand payloads, retries, timeouts, and safety practices.
+version: 1.15.1
+---
+
 # Custom Delivery Scripts
 
 Reela CLI can run your own local script when a video task completes or fails. Use this to connect Reela with your own workflow, such as moving files, sending a local notification, updating a spreadsheet, or triggering another tool.

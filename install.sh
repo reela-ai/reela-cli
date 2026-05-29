@@ -131,8 +131,6 @@ main() {
   info "CLI docs installed to $DOCS_DIR"
   echo ""
   echo "  Run 'reela --help' to get started."
-  echo ""
-  echo "  Agents can discover local docs with: reela docs --json"
 }
 
 main "$@"

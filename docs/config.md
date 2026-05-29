@@ -1,3 +1,9 @@
+---
+title: Reela Config
+description: Configure CLI profiles, API endpoints, delivery methods, download paths, and local settings.
+version: 1.15.1
+---
+
 # Reela Config
 
 Reference for direct Reela CLI configuration commands.

@@ -1,3 +1,9 @@
+---
+title: Reela Create — Flag Reference
+description: Create video tasks, choose visual types, attach source files, and tune common creation flags.
+version: 1.15.1
+---
+
 # Reela Create — Flag Reference
 
 > For the live parameter list with current defaults, always run `reela create -h`.
