@@ -10,22 +10,19 @@ Reference for direct Reela CLI task commands.
 reela tasks list
 ```
 
-Useful filters:
+Useful pagination and sorting options:
 
 ```bash
 reela tasks list --limit 20 --offset 0 --sort created_at:desc
-reela tasks list --status 130
 ```
 
-Status codes:
+Task status is shown and filtered as a text label, such as `pending`, `processing`, `failed`, `completed`, `cancelled`, or `partial`.
 
-| Code | Meaning |
-| --- | --- |
-| `0` | cancelled |
-| `1` | pending |
-| `2` | processing |
-| `10` | failed |
-| `130` | completed |
+```bash
+reela tasks list --status completed
+```
+
+The CLI does not accept numeric task status codes.
 
 ## Show one task
 

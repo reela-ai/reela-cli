@@ -29,17 +29,23 @@ reela config sync
 | --- | --- |
 | `delivery.download` | Directory used by daemon delivery and `reela tasks download` when no `--out-dir` is provided. Default: `~/Videos/reela`. |
 | `delivery.notify` | Enable OS desktop notifications. Use `true` or `false`. |
-| `delivery.script.path` | Optional delivery hook script path. |
-| `delivery.script.timeout_seconds` | Timeout for the delivery hook script. Default: `300`. |
+| `delivery.max_retries` | Maximum daemon delivery attempts before giving up and removing a stuck queue message. Default: `3`. |
+| `delivery.script.path` | Optional custom local delivery script path. |
+| `delivery.script.timeout_seconds` | Timeout for the custom delivery script. Default: `300`. |
+| `delivery.script.max_retries` | Maximum script delivery attempts when only the script hook fails. Defaults to `delivery.max_retries`. |
 
 Examples:
 
 ```bash
 reela config set delivery.download ~/Videos/reela
 reela config set delivery.notify true
+reela config set delivery.max_retries 3
 reela config set delivery.script.path ./on-reela-complete.sh
 reela config set delivery.script.timeout_seconds 300
+reela config set delivery.script.max_retries 5
 ```
+
+For instructions on creating a custom delivery script, see `script.md` from `reela docs --json`.
 
 ## Profiles
 

@@ -2,17 +2,19 @@
 
 > For the live parameter list with current defaults, always run `reela create -h`.
 
-## Visual Types — Director Roles
+## Visual Types
 
-Each visual type plays a creative role. Picking the right combination is choosing which roles tell the story.
+`--visual` selects the visual source/type used by `reela create`.
 
-- **`ai-video`** — your generative camera. Free imagination, no anchor. Use for stories Reela invents from scratch or visualizes from a reference image.
-- **`avatar`** — your on-screen narrator. Pins identity and voice. Use when the user wants "someone speaking on camera." Always pair with `--avatar <id>` and typically with `--visual ai-video` for surrounding shots.
-- **`original-clip`** — the user's footage as B-roll. Audio is muted; AI voiceover or AI-generated cuts fill the soundtrack. Use for product demos, screen recordings, silent footage.
-- **`original-sync`** — the user's footage with original audio preserved. Use when audio-visual sync matters: interviews, performances, talking-heads from the user's own camera.
-- **`image-video`** — animates a single user-provided image. Lower quality than `ai-video` + `reference-image`. Use only when the user explicitly says "animate this image."
+Supported values:
 
-You assemble the cast by repeating `--visual` for each role needed.
+- **`ai-video`** — generate AI video visuals.
+- **`avatar`** — include an avatar track. Requires `--avatar <id>`.
+- **`original-clip`** — use uploaded video clips with original audio muted.
+- **`original-sync`** — use uploaded video clips with original audio preserved/synchronized.
+- **`image-video`** — animate a single uploaded image.
+
+Repeat `--visual` to combine multiple visual types.
 
 ## Visual Combinations
 
@@ -39,14 +41,9 @@ Comma-joined values are invalid (`--visual avatar,ai-video` will not work).
 
 ## Music Video / MV Mode
 
-`--music-video` is the **AI-generated MV** switch. Reela writes a song, composes the music, and produces the music video around it. Default: off.
+`--music-video` enables AI-generated MV mode. In this mode, Reela writes/generates the song and produces the video around it. Default: off.
 
-When to use:
-- User explicitly asks for an MV, music video, AI-generated song, lyric video, or song-led video.
-
-When NOT to use:
-- A normal promo / explainer / product / social video that "would benefit from background music." For that, leave `--music-video` off and mention the desired music mood in the prompt.
-- The user provided their own song file. Use `--file background-music:...` instead. Do **not** combine `--file background-music:` with `--music-video`.
+For a user-provided song file, pass it as `--file background-music:...` instead of using `--music-video`. Do not combine `--file background-music:...` with `--music-video`.
 
 ```bash
 # AI-generated MV (Reela writes the song)
@@ -70,9 +67,17 @@ Videos created with the same `--session` name share a collection.
 
 ## Duration and Layout
 
-- `--duration <seconds>` — explicit user statement ("30 seconds", "1 分钟") drives the value. Default `30` if unspecified.
-- `--layout landscape|portrait|square` — default is **portrait** (most short-form social video lives there). Switch to **landscape** only on an explicit signal:
-  - User says "横屏" / "landscape" / "16:9" / "desktop" / "web embed".
-  - User names a landscape-dominant platform: YouTube long-form, LinkedIn, training video, web hero, conference recording.
-  - Explicit portrait signals confirm portrait: TikTok / 抖音 / Instagram Reels / YouTube Shorts / 小红书 / 竖屏 / "for phone".
-  - When the platform / format is genuinely ambiguous (no signal either way), include layout in your one clarifying question rather than defaulting.
+- `--duration <seconds>` — output duration in seconds. Default: `30`.
+- `--layout landscape|portrait|square` — output aspect/layout. Default: `portrait`.
+
+## Quality and Cost Tiers
+
+`--tier <tier>` selects the quality/cost tier for the task.
+
+To see the current available tiers and user-facing descriptions, run:
+
+```bash
+reela tiers list
+```
+
+If `--tier` is omitted, the CLI uses the default tier when available.

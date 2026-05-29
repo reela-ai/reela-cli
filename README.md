@@ -35,6 +35,9 @@ reela login
 # Create a video
 reela create -p "A 30-second product demo for my app"
 
+# See current quality/cost tiers
+reela tiers list
+
 # Check video status
 reela status
 
@@ -52,6 +55,7 @@ reela tasks
 | `create` | Create a new video                   |
 | `status` | Check status of recent tasks         |
 | `tasks`  | List all tasks                       |
+| `tiers`  | List current quality/cost tiers      |
 | `config` | Manage CLI configuration             |
 | `docs`   | Print local CLI documentation paths  |
 
