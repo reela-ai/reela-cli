@@ -1,7 +1,7 @@
 ---
 title: Reela Create — Flag Reference
 description: Create video tasks, choose visual types, attach source files, and tune common creation flags.
-version: 1.15.2
+version: 1.15.3
 ---
 
 # Reela Create — Flag Reference
@@ -54,11 +54,13 @@ For a user-provided song file, pass it as `--file background-music:...` instead 
 ```bash
 # AI-generated MV (Reela writes the song)
 reela create "AI-generated city-pop MV about a rainy neon street" \
+  --session "Rainy neon city-pop music video" \
   --visual ai-video \
   --music-video --duration 60 --dry-run
 
 # User-provided song MV (NOT --music-video)
 reela create "City pop MV with neon visuals" \
+  --session "City pop neon song MV" \
   --visual ai-video \
   --file background-music:./song_with_lyrics.mp3 \
   --duration 180 --layout portrait --dry-run
@@ -66,10 +68,13 @@ reela create "City pop MV with neon visuals" \
 
 ## Session & Collection Grouping
 
-Videos created with the same `--session` name share a collection.
+`--session` is the natural-language title for the collection/session that groups related tasks.
 
-- Default session: `{hostname}-{username}-{YYYY-MM-DD}` (daily rotation)
-- Use `--session` explicitly when the user wants several videos grouped (e.g., a multi-shot series).
+- Use a descriptive human title, e.g. `--session "Spring product launch TikTok videos"`.
+- Agent and automation callers should pass `--session` explicitly on every create command, including dry runs and final submissions.
+- Use the same `--session` title when several videos belong to one project or batch (e.g., a multi-shot series).
+- Avoid random IDs, machine names, date-only labels, or overly technical strings.
+- If omitted, the CLI falls back to `reela-{YYYY-MM-DD}` using the CLI machine's local date (daily rotation), but this is only a fallback.
 
 ## Duration and Layout
 
