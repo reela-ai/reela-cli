@@ -1,7 +1,7 @@
 ---
 title: Daemon & Delivery
 description: Run the background daemon, subscribe to task updates, and deliver completed videos automatically.
-version: 1.15.3
+version: 1.16.4
 ---
 
 # Daemon & Delivery
