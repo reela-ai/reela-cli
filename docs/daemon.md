@@ -1,7 +1,7 @@
 ---
 title: Daemon & Delivery
 description: Run the background daemon, subscribe to task updates, and deliver completed videos automatically.
-version: 1.16.4
+version: 1.17.3
 ---
 
 # Daemon & Delivery
@@ -54,7 +54,7 @@ reela daemon start --keep-backlog
 | `delivery.script.timeout_seconds` | `300` | Script timeout in seconds |
 | `delivery.script.max_retries` | `delivery.max_retries` | Maximum script delivery attempts when only the script hook fails |
 
-Set via `reela config set <key> <value>`.
+Set via `reela config set <key> <value>`. Delivery settings are profile-specific; use `--profile <name>` or switch the active profile to configure a different account.
 
 ## Email delivery
 
@@ -65,7 +65,7 @@ reela config set delivery.methods '["download", "email"]'
 reela config set delivery.email.address user@example.com
 ```
 
-The daemon will save the file locally AND email a link on completion.
+The daemon will save the file locally AND email a link on completion for the effective profile only.
 
 ## Custom script delivery
 

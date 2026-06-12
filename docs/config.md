@@ -1,7 +1,7 @@
 ---
 title: Reela Config
 description: Configure CLI profiles, API endpoints, delivery methods, download paths, and local settings.
-version: 1.16.4
+version: 1.17.3
 ---
 
 # Reela Config
@@ -16,7 +16,7 @@ Configuration is stored under `~/.reela/`.
 
 - `~/.reela/` stores local CLI configuration.
 - Profiles let you keep separate Reela accounts and local settings under `~/.reela/profiles/<name>/`.
-- Delivery settings are shared across profiles.
+- Delivery settings are profile-specific, so each account can use its own download directory, email address, and script hook.
 
 ## Common commands
 
@@ -33,7 +33,7 @@ reela config sync
 
 | Key | Description |
 | --- | --- |
-| `delivery.download` | Directory used by daemon delivery and `reela tasks download` when no `--out-dir` is provided. Default: `~/Videos/reela`. |
+| `delivery.download` | Profile-specific directory used by daemon delivery and `reela tasks download` when no `--out-dir` is provided. Default: `~/Videos/reela`. |
 | `delivery.notify` | Enable OS desktop notifications. Use `true` or `false`. |
 | `delivery.max_retries` | Maximum daemon delivery attempts before giving up and removing a stuck queue message. Default: `3`. |
 | `delivery.script.path` | Optional custom local delivery script path. |
@@ -66,3 +66,5 @@ reela config profiles delete <profile-name>
 ```
 
 Use `--profile <name>` or `REELA_PROFILE=<name>` for one-off commands without changing the active profile.
+
+Delivery keys are resolved for the effective profile. For example, `reela --profile work config set delivery.download ~/Videos/reela-work` only changes the `work` profile and does not affect `default`.
