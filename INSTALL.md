@@ -35,6 +35,7 @@ Expected files include:
 ~/.reela/docs/daemon.md
 ~/.reela/docs/config.md
 ~/.reela/docs/tasks.md
+~/.reela/docs/show.md
 ```
 
 Agents should run `reela docs` before using Reela CLI so they can read only the docs needed for the current task. Agent workflow, posture, and use cases live in the optional Reela skills.

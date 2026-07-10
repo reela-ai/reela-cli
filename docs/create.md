@@ -1,7 +1,7 @@
 ---
 title: Reela Create — Flag Reference
 description: Create video tasks, choose visual types, attach source files, and tune common creation flags.
-version: 1.19.22
+version: 1.20.6
 ---
 
 # Reela Create — Flag Reference

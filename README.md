@@ -56,6 +56,7 @@ reela tasks
 | `status` | Check status of recent tasks         |
 | `tasks`  | List all tasks                       |
 | `tiers`  | List current quality/cost tiers      |
+| `show`   | Manage Show episode workspaces       |
 | `config` | Manage CLI configuration             |
 | `docs`   | Print local CLI documentation paths  |
 
