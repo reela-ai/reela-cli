@@ -74,6 +74,16 @@ reela config profiles show
 
 Use `--profile <name>` or `REELA_PROFILE=<name>` for one-off commands, or `reela config profiles use <name>` to set the active profile.
 
+### Environment authentication
+
+Set `REELA_ACCESS_TOKEN` to authenticate non-interactively:
+
+```sh
+REELA_ACCESS_TOKEN=<jwt> reela whoami
+```
+
+The CLI sends its value unchanged as `Authorization: Bearer <token>`. This token takes priority over the effective profile's `credentials.json`, is never written to disk, and is not removed by `reela logout`. Unset the environment variable to stop using it.
+
 ## License
 
 Proprietary. See [reela.com](https://reela.com) for terms of service.

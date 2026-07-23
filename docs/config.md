@@ -1,7 +1,7 @@
 ---
 title: Reela Config
 description: Configure CLI profiles, API endpoints, delivery methods, download paths, and local settings.
-version: 1.20.6
+version: 1.20.40
 ---
 
 # Reela Config
@@ -68,3 +68,19 @@ reela config profiles delete <profile-name>
 Use `--profile <name>` or `REELA_PROFILE=<name>` for one-off commands without changing the active profile.
 
 Delivery keys are resolved for the effective profile. For example, `reela --profile work config set delivery.download ~/Videos/reela-work` only changes the `work` profile and does not affect `default`.
+
+## Authentication environment variable
+
+For non-interactive use, set a JWT in `REELA_ACCESS_TOKEN`:
+
+```bash
+REELA_ACCESS_TOKEN=<jwt> reela whoami
+```
+
+Authentication is resolved in this order:
+
+1. `REELA_ACCESS_TOKEN`
+2. The effective profile's `credentials.json`
+3. No authentication
+
+The environment value is sent unchanged as `Authorization: Bearer <token>`. It is not saved to disk, and `reela logout` only removes stored profile credentials; it does not unset or modify `REELA_ACCESS_TOKEN`.

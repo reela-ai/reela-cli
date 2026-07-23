@@ -1,7 +1,7 @@
 ---
 title: Reela Shows
 description: Download Shows as local workspaces and validate, add, update, or delete episode Markdown files.
-version: 1.20.6
+version: 1.20.40
 ---
 
 # Reela Shows
