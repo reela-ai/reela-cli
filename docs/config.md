@@ -1,7 +1,7 @@
 ---
 title: Reela Config
 description: Configure CLI profiles, API endpoints, delivery methods, download paths, and local settings.
-version: 1.20.40
+version: 1.21.27
 ---
 
 # Reela Config
