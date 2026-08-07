@@ -1,7 +1,7 @@
 ---
 title: Reela Tasks
 description: List, inspect, wait for, and download generated video tasks from the Reela CLI.
-version: 1.21.27
+version: 1.22.0
 ---
 
 # Reela Tasks
