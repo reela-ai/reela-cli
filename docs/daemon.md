@@ -1,7 +1,7 @@
 ---
 title: Daemon & Delivery
 description: Run the background daemon, subscribe to task updates, and deliver completed videos automatically.
-version: 1.22.0
+version: 1.22.1
 ---
 
 # Daemon & Delivery
@@ -43,16 +43,16 @@ reela daemon start --keep-backlog
 
 ## Configuration
 
-| Key | Default | Description |
-|-----|---------|-------------|
-| `delivery.download` | `~/Videos/reela` | Download directory |
-| `delivery.notify` | `true` | OS desktop notifications |
-| `delivery.methods` | `["download"]` | Active delivery method(s) — `download`, `email`, `script` |
-| `delivery.max_retries` | `3` | Maximum daemon delivery attempts before giving up and removing a stuck queue message |
-| `delivery.email.address` | (account email) | Custom email address for email delivery |
-| `delivery.script.path` | (empty) | Custom local script to run on completion/failure |
-| `delivery.script.timeout_seconds` | `300` | Script timeout in seconds |
-| `delivery.script.max_retries` | `delivery.max_retries` | Maximum script delivery attempts when only the script hook fails |
+| Key                               | Default                | Description                                                                          |
+| --------------------------------- | ---------------------- | ------------------------------------------------------------------------------------ |
+| `delivery.download`               | `~/Videos/reela`       | Download directory                                                                   |
+| `delivery.notify`                 | `true`                 | OS desktop notifications                                                             |
+| `delivery.methods`                | `["download"]`         | Active delivery method(s) — `download`, `email`, `script`                            |
+| `delivery.max_retries`            | `3`                    | Maximum daemon delivery attempts before giving up and removing a stuck queue message |
+| `delivery.email.address`          | (account email)        | Custom email address for email delivery                                              |
+| `delivery.script.path`            | (empty)                | Custom local script to run on completion/failure                                     |
+| `delivery.script.timeout_seconds` | `300`                  | Script timeout in seconds                                                            |
+| `delivery.script.max_retries`     | `delivery.max_retries` | Maximum script delivery attempts when only the script hook fails                     |
 
 Set via `reela config set <key> <value>`. Delivery settings are profile-specific; use `--profile <name>` or switch the active profile to configure a different account.
 

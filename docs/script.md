@@ -1,7 +1,7 @@
 ---
 title: Custom Delivery Scripts
 description: Build local delivery callback scripts, understand payloads, retries, timeouts, and safety practices.
-version: 1.22.0
+version: 1.22.1
 ---
 
 # Custom Delivery Scripts

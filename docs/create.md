@@ -1,7 +1,7 @@
 ---
 title: Reela Create — Flag Reference
 description: Create video tasks, choose visual types, attach source files, and tune common creation flags.
-version: 1.22.0
+version: 1.22.1
 ---
 
 # Reela Create — Flag Reference
@@ -32,18 +32,18 @@ Multiple visual types must be specified by repeating `--visual`:
 
 Comma-joined values are invalid (`--visual avatar,ai-video` will not work).
 
-| Scenario | Visual flags | Additional flags |
-|---|---|---|
-| AI explainer | `--visual ai-video` | — |
-| Avatar talking-head | `--visual avatar --visual ai-video` | `--avatar <id>` |
-| Clip remix + AI filler | `--visual original-clip --visual ai-video` | `--file video-source:...` |
-| Avatar + clips | `--visual avatar --visual original-clip --visual ai-video` | `--avatar <id>` + `--file video-source:...` |
-| MV from user's song | `--visual ai-video` | `--file background-music:...` |
-| AI-generated MV / music video | `--visual ai-video` | `--music-video` |
-| Synced video edit | `--visual original-sync` | `--file video-audio:...` |
-| Pure clips (no AI) | `--visual original-clip` | `--file video-source:...` |
-| Image animation | `--visual image-video` | `--file original-image:...` |
-| Image as style reference | `--visual ai-video` | `--file reference-image:...` |
+| Scenario                      | Visual flags                                               | Additional flags                            |
+| ----------------------------- | ---------------------------------------------------------- | ------------------------------------------- |
+| AI explainer                  | `--visual ai-video`                                        | —                                           |
+| Avatar talking-head           | `--visual avatar --visual ai-video`                        | `--avatar <id>`                             |
+| Clip remix + AI filler        | `--visual original-clip --visual ai-video`                 | `--file video-source:...`                   |
+| Avatar + clips                | `--visual avatar --visual original-clip --visual ai-video` | `--avatar <id>` + `--file video-source:...` |
+| MV from user's song           | `--visual ai-video`                                        | `--file background-music:...`               |
+| AI-generated MV / music video | `--visual ai-video`                                        | `--music-video`                             |
+| Synced video edit             | `--visual original-sync`                                   | `--file video-audio:...`                    |
+| Pure clips (no AI)            | `--visual original-clip`                                   | `--file video-source:...`                   |
+| Image animation               | `--visual image-video`                                     | `--file original-image:...`                 |
+| Image as style reference      | `--visual ai-video`                                        | `--file reference-image:...`                |
 
 ## Music Video / MV Mode
 
@@ -75,6 +75,19 @@ reela create "City pop MV with neon visuals" \
 - Use the same `--session` title when several videos belong to one project or batch (e.g., a multi-shot series).
 - Avoid random IDs, machine names, date-only labels, or overly technical strings.
 - If omitted, the CLI falls back to `reela-{YYYY-MM-DD}` using the CLI machine's local date (daily rotation), but this is only a fallback.
+
+### Force a Collection with an Environment Variable
+
+Set `REELA_COLLECTION_ID` to force every non-dry-run `reela create` command into an existing collection:
+
+```bash
+export REELA_COLLECTION_ID=123456789
+reela create "Product launch teaser" --visual ai-video
+```
+
+When `REELA_COLLECTION_ID` is set to a non-empty value, it has the highest priority. The CLI ignores `--session`, does not consult the local session index, and does not create a new collection. The API still verifies that the collection exists and belongs to the authenticated user.
+
+`--dry-run` does not create a video task, so it does not resolve or validate a collection.
 
 ## Duration and Layout
 

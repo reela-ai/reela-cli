@@ -1,7 +1,7 @@
 ---
 title: Reela Config
 description: Configure CLI profiles, API endpoints, delivery methods, download paths, and local settings.
-version: 1.22.0
+version: 1.22.1
 ---
 
 # Reela Config
@@ -31,14 +31,14 @@ reela config sync
 
 ## Supported config keys
 
-| Key | Description |
-| --- | --- |
-| `delivery.download` | Profile-specific directory used by daemon delivery and `reela tasks download` when no `--out-dir` is provided. Default: `~/Videos/reela`. |
-| `delivery.notify` | Enable OS desktop notifications. Use `true` or `false`. |
-| `delivery.max_retries` | Maximum daemon delivery attempts before giving up and removing a stuck queue message. Default: `3`. |
-| `delivery.script.path` | Optional custom local delivery script path. |
-| `delivery.script.timeout_seconds` | Timeout for the custom delivery script. Default: `300`. |
-| `delivery.script.max_retries` | Maximum script delivery attempts when only the script hook fails. Defaults to `delivery.max_retries`. |
+| Key                               | Description                                                                                                                               |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `delivery.download`               | Profile-specific directory used by daemon delivery and `reela tasks download` when no `--out-dir` is provided. Default: `~/Videos/reela`. |
+| `delivery.notify`                 | Enable OS desktop notifications. Use `true` or `false`.                                                                                   |
+| `delivery.max_retries`            | Maximum daemon delivery attempts before giving up and removing a stuck queue message. Default: `3`.                                       |
+| `delivery.script.path`            | Optional custom local delivery script path.                                                                                               |
+| `delivery.script.timeout_seconds` | Timeout for the custom delivery script. Default: `300`.                                                                                   |
+| `delivery.script.max_retries`     | Maximum script delivery attempts when only the script hook fails. Defaults to `delivery.max_retries`.                                     |
 
 Examples:
 

@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Legacy compatibility for users upgrading from earlier CLI versions.
 - Local CLI docs installed to `~/.reela/docs` and discoverable with `reela docs`.
 - Ephemeral authentication with `REELA_ACCESS_TOKEN`, which takes priority over profile credentials.
+- Forced collection targeting with `REELA_COLLECTION_ID`, which takes priority over `--session` for video creation.
 
 ### Changed
 
