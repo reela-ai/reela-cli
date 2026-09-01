@@ -54,13 +54,3 @@ Use a profile for one command without changing the active profile:
 reela --profile work whoami
 reela --profile work config set delivery.download ~/Videos/reela-work
 ```
-
-## Access token
-
-For unattended commands, provide an access token in the command environment:
-
-```bash
-REELA_ACCESS_TOKEN=<token> reela whoami
-```
-
-Remove the environment variable when you no longer want to use it.

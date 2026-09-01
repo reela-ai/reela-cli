@@ -75,12 +75,6 @@ Use a profile for one command without changing the active profile:
 reela --profile work whoami
 ```
 
-For unattended use, provide an access token for the command:
-
-```sh
-REELA_ACCESS_TOKEN=<token> reela whoami
-```
-
 ## License
 
 Proprietary. See [reela.com](https://reela.com) for terms of service.
