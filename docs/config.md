@@ -1,44 +1,31 @@
 ---
 title: Reela Config
-description: Configure CLI profiles, API endpoints, delivery methods, download paths, and local settings.
+description: Manage profiles, downloads, notifications, and delivery settings.
 version: 1.22.1
 ---
 
 # Reela Config
 
-Reference for direct Reela CLI configuration commands.
+Run `reela config -h` or `reela config <subcommand> -h` for current options.
 
-> For live command syntax, run `reela config -h` and `reela config <subcommand> -h`.
-
-## Config storage
-
-Configuration is stored under `~/.reela/`.
-
-- `~/.reela/` stores local CLI configuration.
-- Profiles let you keep separate Reela accounts and local settings under `~/.reela/profiles/<name>/`.
-- Delivery settings are profile-specific, so each account can use its own download directory, email address, and script hook.
-
-## Common commands
+## View and change settings
 
 ```bash
 reela config list
 reela config get <key>
 reela config set <key> <value>
-reela config sync
 ```
 
-`reela config sync` refreshes local CLI settings from Reela. Run it if the CLI reports that local configuration is stale or missing.
+## Common settings
 
-## Supported config keys
-
-| Key                               | Description                                                                                                                               |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `delivery.download`               | Profile-specific directory used by daemon delivery and `reela tasks download` when no `--out-dir` is provided. Default: `~/Videos/reela`. |
-| `delivery.notify`                 | Enable OS desktop notifications. Use `true` or `false`.                                                                                   |
-| `delivery.max_retries`            | Maximum daemon delivery attempts before giving up and removing a stuck queue message. Default: `3`.                                       |
-| `delivery.script.path`            | Optional custom local delivery script path.                                                                                               |
-| `delivery.script.timeout_seconds` | Timeout for the custom delivery script. Default: `300`.                                                                                   |
-| `delivery.script.max_retries`     | Maximum script delivery attempts when only the script hook fails. Defaults to `delivery.max_retries`.                                     |
+| Setting | Use | Example |
+| --- | --- | --- |
+| `delivery.download` | Choose the download folder | `~/Videos/reela` |
+| `delivery.notify` | Turn desktop notifications on or off | `true` |
+| `delivery.max_retries` | Choose how many times delivery is retried | `3` |
+| `delivery.script.path` | Choose a custom delivery script | `~/bin/reela-callback.sh` |
+| `delivery.script.timeout_seconds` | Set the script time limit | `300` |
+| `delivery.script.max_retries` | Choose how many times the script is retried | `3` |
 
 Examples:
 
@@ -46,41 +33,34 @@ Examples:
 reela config set delivery.download ~/Videos/reela
 reela config set delivery.notify true
 reela config set delivery.max_retries 3
-reela config set delivery.script.path ./on-reela-complete.sh
-reela config set delivery.script.timeout_seconds 300
-reela config set delivery.script.max_retries 5
 ```
 
-For instructions on creating a custom delivery script, see `script.md` from `reela docs`.
+See the `script` guide listed by `reela -h` to use a custom delivery script.
 
 ## Profiles
 
-Use profiles to switch between Reela accounts or separate local workspaces.
-
 ```bash
 reela config profiles list
-reela config profiles create <profile-name>
-reela config profiles use <profile-name>
-reela config profiles show [profile-name]
-reela config profiles delete <profile-name>
+reela config profiles create work
+reela config profiles use work
+reela config profiles show
+reela config profiles show work
+reela config profiles delete work
 ```
 
-Use `--profile <name>` or `REELA_PROFILE=<name>` for one-off commands without changing the active profile.
-
-Delivery keys are resolved for the effective profile. For example, `reela --profile work config set delivery.download ~/Videos/reela-work` only changes the `work` profile and does not affect `default`.
-
-## Authentication environment variable
-
-For non-interactive use, set a JWT in `REELA_ACCESS_TOKEN`:
+Use a profile for one command without changing the active profile:
 
 ```bash
-REELA_ACCESS_TOKEN=<jwt> reela whoami
+reela --profile work whoami
+reela --profile work config set delivery.download ~/Videos/reela-work
 ```
 
-Authentication is resolved in this order:
+## Access token
 
-1. `REELA_ACCESS_TOKEN`
-2. The effective profile's `credentials.json`
-3. No authentication
+For unattended commands, provide an access token in the command environment:
 
-The environment value is sent unchanged as `Authorization: Bearer <token>`. It is not saved to disk, and `reela logout` only removes stored profile credentials; it does not unset or modify `REELA_ACCESS_TOKEN`.
+```bash
+REELA_ACCESS_TOKEN=<token> reela whoami
+```
+
+Remove the environment variable when you no longer want to use it.

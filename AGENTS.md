@@ -1,3 +1,3 @@
 # Repository Maintenance
 
-This repository is automatically published. Manual changes may be overwritten by the next automated sync. Do not manually update files in this repository.
+Do not edit published files manually. Make changes in the Reela CLI source repository.

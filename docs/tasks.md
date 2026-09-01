@@ -1,56 +1,35 @@
 ---
 title: Reela Tasks
-description: List, inspect, wait for, and download generated video tasks from the Reela CLI.
+description: List, inspect, and download generated videos.
 version: 1.22.1
 ---
 
 # Reela Tasks
 
-Reference for direct Reela CLI task commands.
-
-> For live command syntax, run `reela tasks -h` and `reela tasks <subcommand> -h`.
+Run `reela tasks -h` or `reela tasks <subcommand> -h` for current options.
 
 ## List tasks
 
 ```bash
 reela tasks list
-```
-
-Useful pagination and sorting options:
-
-```bash
+reela tasks list --status completed
 reela tasks list --limit 20 --offset 0 --sort created_at:desc
 ```
 
-Task status is shown and filtered as a text label, such as `pending`, `processing`, `failed`, `completed`, `cancelled`, or `partial`.
-
-```bash
-reela tasks list --status completed
-```
-
-The CLI does not accept numeric task status codes.
+Available status filters include `pending`, `processing`, `failed`, `completed`, `cancelled`, and `partial`.
 
 ## Show one task
 
 ```bash
-reela tasks get <task_id>
+reela tasks get <task-id>
+reela --output json tasks get <task-id>
 ```
 
-This shows the task status, progress, and prompt. Use `--output json` for machine-readable output.
-
-## Download task output
+## Download a finished video
 
 ```bash
-reela tasks download <task_id>
-reela tasks download <task_id> --out-dir ~/Videos/reela
+reela tasks download <task-id>
+reela tasks download <task-id> --out-dir ~/Videos/reela
 ```
 
-If `--out-dir` is omitted, the CLI uses `delivery.download` from config.
-
-## Retry
-
-```bash
-reela tasks retry <task_id>
-```
-
-Retry is not available yet.
+If no output directory is given, Reela uses the configured download directory.

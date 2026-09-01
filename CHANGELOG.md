@@ -1,33 +1,25 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
-
 ## [Unreleased]
 
 ### Added
 
-- First-class CLI profile management: `reela config profiles list/show/create/delete/use`.
-- Profile-specific account state and local settings under `~/.reela/profiles/<name>/`.
-- Legacy compatibility for users upgrading from earlier CLI versions.
-- Local CLI docs installed to `~/.reela/docs` and discoverable with `reela docs`.
-- Ephemeral authentication with `REELA_ACCESS_TOKEN`, which takes priority over profile credentials.
-- Forced collection targeting with `REELA_COLLECTION_ID`, which takes priority over `--session` for video creation.
+- Manage profiles with `reela config profiles list/show/create/delete/use`.
+- Use `REELA_ACCESS_TOKEN` for unattended commands.
+- Choose a collection with `REELA_COLLECTION_ID` when creating videos.
+- Find installed command guides with `reela -h`.
 
 ### Changed
 
-- Delivery settings remain global while account-specific CLI state follows the effective profile.
+- Profiles can keep separate accounts and preferences.
 
 ## [0.1.0]
 
 ### Added
 
-- Initial release
-- `login` / `logout` / `whoami` — authentication via OAuth Device Flow
-- `create` — create videos with prompt, avatar, and collection options
-- `status` — check status of recent tasks
-- `tasks` — list all tasks with filtering
-- `config` — manage CLI profiles and settings
-- Desktop notifications for completed/failed tasks
-- Multi-profile support
+- Sign in and out with `login`, `logout`, and `whoami`.
+- Create videos with `create`.
+- Check videos with `status` and `tasks`.
+- Manage settings with `config`.
+- Receive desktop notifications when tasks finish.
+- Use multiple profiles.

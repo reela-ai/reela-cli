@@ -1,89 +1,81 @@
 ---
-title: Daemon & Delivery
-description: Run the background daemon, subscribe to task updates, and deliver completed videos automatically.
+title: Automatic Delivery
+description: Automatically save finished videos and send completion notifications.
 version: 1.22.1
 ---
 
-# Daemon & Delivery
+# Automatic Delivery
 
-The daemon is a background process that monitors task completion and delivers finished videos. Without it, the user has to poll `reela tasks list` manually.
+Run `reela daemon -h` and `reela subscribe -h` for current options.
 
-> For live command syntax, run `reela daemon -h` and `reela subscribe -h`.
+## Start automatic delivery
 
-## What it does
-
-- Watches for task completion (success or failure)
-- Saves finished `.mp4` files to a local directory
-- Sends OS notifications when a task completes or fails
-- Optionally emails the video link
-- Optionally runs your custom local script when a task completes or fails
-- Runs detached from your CLI session — submit a task, close the terminal, get the video later
-
-## Start the daemon
-
-Start the daemon with:
+Start it for the current session:
 
 ```bash
 reela daemon start
 ```
 
-Or set it to start automatically on login (one-time setup):
+Set it to start automatically when you sign in to your computer:
 
 ```bash
 reela daemon install
 ```
 
-After that, submitted tasks are delivered automatically.
-
-By default, daemon startup ignores older task updates from before the daemon started. To intentionally process existing older updates, start it with:
+Check or stop it:
 
 ```bash
-reela daemon start --keep-backlog
+reela daemon status
+reela daemon stop
 ```
 
-## Configuration
-
-| Key                               | Default                | Description                                                                          |
-| --------------------------------- | ---------------------- | ------------------------------------------------------------------------------------ |
-| `delivery.download`               | `~/Videos/reela`       | Download directory                                                                   |
-| `delivery.notify`                 | `true`                 | OS desktop notifications                                                             |
-| `delivery.methods`                | `["download"]`         | Active delivery method(s) — `download`, `email`, `script`                            |
-| `delivery.max_retries`            | `3`                    | Maximum daemon delivery attempts before giving up and removing a stuck queue message |
-| `delivery.email.address`          | (account email)        | Custom email address for email delivery                                              |
-| `delivery.script.path`            | (empty)                | Custom local script to run on completion/failure                                     |
-| `delivery.script.timeout_seconds` | `300`                  | Script timeout in seconds                                                            |
-| `delivery.script.max_retries`     | `delivery.max_retries` | Maximum script delivery attempts when only the script hook fails                     |
-
-Set via `reela config set <key> <value>`. Delivery settings are profile-specific; use `--profile <name>` or switch the active profile to configure a different account.
-
-## Email delivery
-
-To enable email delivery:
+View recent logs:
 
 ```bash
-reela config set delivery.methods '["download", "email"]'
-reela config set delivery.email.address user@example.com
+reela daemon logs
+reela daemon logs --tail 50
 ```
 
-The daemon will save the file locally AND email a link on completion for the effective profile only.
+## Choose delivery methods
 
-## Custom script delivery
+List the current methods:
 
-To run your own local script when a task completes or fails:
+```bash
+reela subscribe list
+reela subscribe status
+```
+
+Save finished videos to a folder:
+
+```bash
+reela subscribe add download --dir ~/Videos/reela
+```
+
+Send a completion email:
+
+```bash
+reela subscribe add email --address user@example.com
+```
+
+Run a custom script:
 
 ```bash
 reela subscribe add script --path ~/bin/reela-callback.sh --timeout-seconds 300 --max-retries 3
 ```
 
-For script creation, payload format, and safety guidelines, see `script.md` from `reela docs`.
-
-## Manual polling without the daemon
-
-Tasks still continue in Reela when the daemon is not running. Check task status manually with:
+Remove a method:
 
 ```bash
-reela tasks list           # see all tasks
-reela tasks get <task_id>  # check one task's status
+reela subscribe remove email
+reela subscribe remove script
 ```
 
-When status reaches `completed`, download the output with `reela tasks download <task_id>`.
+See the `script` guide listed by `reela -h` for a custom script example.
+
+## Download without automatic delivery
+
+```bash
+reela tasks list
+reela tasks get <task-id>
+reela tasks download <task-id>
+```
