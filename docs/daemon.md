@@ -1,7 +1,7 @@
 ---
 title: Automatic Delivery
 description: Automatically save finished videos and send completion notifications.
-version: 1.22.1
+version: 1.22.2
 ---
 
 # Automatic Delivery
