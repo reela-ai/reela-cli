@@ -1,7 +1,7 @@
 ---
 title: Reela Shows
-description: Download Shows and manage episode files.
-version: 1.22.4
+description: Download Shows, replace subject images, and manage episode files.
+version: 1.23.0
 ---
 
 # Reela Shows
@@ -13,10 +13,23 @@ reela show list
 reela show list --limit 20 --offset 0
 reela show download <show-id>
 reela show download <show-id> --out-dir ./my-show
+reela show download <show-id> --subjects
 reela show download <show-id> --out-dir ./my-show --force
 ```
 
 A downloaded Show contains `show.yaml`, `subjects.yaml`, and episode Markdown files in `episodes/`.
+
+Add `--subjects` to also download each subject's current original image to `subjects/<subject-id>.<ext>`. Subjects without an image are skipped with a warning. Without this flag, no images are downloaded. To refresh an existing workspace, use `--subjects --force`; this also refreshes the Show and episode files. If an image's format changes, the old file with a different extension is retained.
+
+## Replace a subject image
+
+Find the subject ID in `subjects.yaml` or an episode's `subjects` field:
+
+```bash
+reela show subject replace-image <subject-id> --file ./new-image.png
+```
+
+Use a static JPEG, PNG, or WebP image, up to 20 MiB and 40 megapixels. Replacement preserves image history and does not regenerate existing videos. Episode Markdown continues to reference only subject IDs.
 
 ## Episode file format
 

@@ -1,7 +1,7 @@
 ---
 title: Reela Tasks
 description: List, inspect, and download generated videos.
-version: 1.22.4
+version: 1.23.0
 ---
 
 # Reela Tasks

@@ -1,7 +1,7 @@
 ---
 title: Custom Delivery Scripts
 description: Run a local script when a video finishes or fails.
-version: 1.22.4
+version: 1.23.0
 ---
 
 # Custom Delivery Scripts
