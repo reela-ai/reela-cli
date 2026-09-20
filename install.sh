@@ -5,7 +5,6 @@ REPO="${REELA_CLI_REPO:-reela-ai/reela-cli}"
 RELEASE_BASE_URL="${REELA_CLI_RELEASE_BASE_URL:-}"
 DIST_SUFFIX="${REELA_CLI_DIST_SUFFIX:-}"
 INSTALL_DIR="${REELA_INSTALL_DIR:-$HOME/.local/bin}"
-DOCS_DIR="${REELA_DOCS_DIR:-$HOME/.reela/docs}"
 BINARY_NAME="reela"
 TMPDIR_CLEANUP=""
 trap 'if [ -n "$TMPDIR_CLEANUP" ]; then rm -rf "$TMPDIR_CLEANUP"; fi' EXIT
@@ -169,14 +168,6 @@ main() {
   mv "$tmpdir/$BINARY_NAME" "$INSTALL_DIR/$BINARY_NAME"
   chmod +x "$INSTALL_DIR/$BINARY_NAME"
 
-  info "Installing CLI docs to $DOCS_DIR..."
-  if [ ! -d "$tmpdir/docs" ]; then
-    die "Release archive did not contain docs/"
-  fi
-  rm -rf "$DOCS_DIR"
-  mkdir -p "$(dirname "$DOCS_DIR")"
-  cp -R "$tmpdir/docs" "$DOCS_DIR"
-
   # Check if INSTALL_DIR is in PATH
   if ! echo "$PATH" | tr ':' '\n' | grep -qx "$INSTALL_DIR"; then
     echo ""
@@ -188,7 +179,6 @@ main() {
   fi
 
   info "Installed reela v$version to $INSTALL_DIR/$BINARY_NAME"
-  info "CLI docs installed to $DOCS_DIR"
   echo ""
   echo "  Run 'reela --help' to get started."
 }

@@ -38,7 +38,7 @@ reela -h
 reela create -h
 ```
 
-`reela -h` also lists the installed guides for create, delivery, configuration, tasks, Shows, and custom scripts.
+Add `-h` at any command level for options, examples, and input formats.
 
 ## Update
 
