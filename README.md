@@ -7,10 +7,10 @@ Create AI-powered videos from the terminal with [Reela](https://reela.com).
 Linux / macOS:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/reela-ai/reela-cli/main/install.sh | bash
+curl -fsSL https://get.reela.com/reela-cli/install.sh | bash
 ```
 
-For guided setup or installation with an AI agent, follow [INSTALL.md](./INSTALL.md).
+For guided setup or installation with an AI agent, follow the [installation guide](https://get.reela.com/cli/install.txt).
 
 ## Quick start
 
